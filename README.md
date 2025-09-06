@@ -1,122 +1,109 @@
-DB Engineer Chat AI · Pro (Streamlit)
+# 🚀 Postgres Agent – DB Engineer Chat AI (Pro)
 
-Query and manage your PostgreSQL database using natural language. The app converts your prompts into one safe PostgreSQL statement, lets you review/edit, then EXPLAIN or run it. Includes schema introspection and a live diagram.
+Query, visualize, and manage your PostgreSQL database with natural language.  
+Built on Streamlit, powered by CrewAI + Groq, with a modern UI and safety-first design.
 
-Features
+---
 
-Chat-to-SQL via CrewAI + Groq (LiteLLM routing under the hood)
+## 🌟 Features
+- **AI Chat-to-SQL**: Natural language prompts converted to safe SQL (CrewAI + Groq, via LiteLLM).
+- **Safety First**:  
+  - Safe Mode (SELECT/EXPLAIN only)  
+  - Single-statement guard  
+  - Auto-LIMIT and statement timeout  
+- **Schema Awareness**:  
+  - Instant schema introspection  
+  - Graphviz-powered ER diagrams  
+- **Editable SQL**:  
+  - Review, edit, and EXPLAIN before execution  
+  - Download results as CSV  
+- **Saved Queries**: Save, recall, and copy queries.
+- **Modern UI**: Sleek glassmorphism cards, soft shadows, and a Simple Mode to hide advanced options.
 
-Safety first: Safe Mode (SELECT/EXPLAIN only), single-statement guard, auto-LIMIT, statement timeout
+---
 
-Schema aware: quick schema snapshot for grounding + Graphviz diagram
+## ⚡ Quick Start
 
-Editable SQL: review, edit, EXPLAIN, run, and download results as CSV
+### 1️⃣ Requirements
+- Python 3.10+
+- Reachable PostgreSQL instance
+- System Graphviz (for schema diagrams)
 
-Saved queries: save, recall, copy to editor
+### 2️⃣ Install Graphviz
+- **Ubuntu/Debian:** `sudo apt-get install graphviz`
+- **macOS:** `brew install graphviz`
+- **Windows:** [Download & add to PATH](https://graphviz.gitlab.io/_pages/Download/Download_windows.html)
 
-Modern UI: custom CSS (glass cards, soft shadows), optional Simple Mode to hide advanced settings
-
-Quick Start (Local)
-1) Requirements
-
-Python 3.10+
-
-PostgreSQL you can reach from your machine
-
-System Graphviz (for the schema diagram)
-
-Install Graphviz:
-
-Ubuntu/Debian: sudo apt-get install graphviz
-
-macOS (Homebrew): brew install graphviz
-
-Windows: install from the official Graphviz site and add to PATH
-
-2) Clone and setup
-git clone <your-repo-url>
-cd <your-repo>
+### 3️⃣ Setup Project
+```bash
+git clone https://github.com/Tariq3654467/Postgres_Agent.git
+cd Postgres_Agent
 python -m venv .venv
-source .venv/bin/activate   # Windows: .venv\Scripts\activate
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
+```
 
+#### `requirements.txt` includes:
+- streamlit, sqlalchemy, psycopg2-binary, pandas, graphviz, crewai, python-dotenv
 
-requirements.txt
-
-streamlit
-sqlalchemy
-psycopg2-binary
-pandas
-graphviz
-crewai
-python-dotenv
-
-3) Configure secrets
-
-Create a .env file (or use Streamlit secrets on cloud):
-
+### 4️⃣ Configure Secrets
+Create a `.env` file with:
+```env
 GROQ_API_KEY=gsk_your_real_groq_key_here
+```
+> Your key must start with `gsk_`. (OpenAI keys will not work.)
 
-
-Your key must start with gsk_…. OpenAI keys (sk-…) won’t work.
-
-4) Run
+### 5️⃣ Run the App
+```bash
 streamlit run app.py
+```
+Open the browser at the shown URL.
 
+---
 
-Open the app in the browser (Streamlit shows the URL).
+## 💡 Usage
 
-Using the App
+- Connect to PostgreSQL via the sidebar (host, port, db, user, password, GROQ_API_KEY).
+- Click **Connect**.
+- Chat with the agent!  
+  **Example prompts:**
+  - `list tables`
+  - `top 50 orders by total`
+  - `describe table customers`
+  - `count users per country order by count desc`
+- Review SQL before execution (edit as needed).
+- Use **EXPLAIN** to preview the plan, or **Run** to execute.
+- Browse schema and saved queries in the right panel.
+- **Safety Tip:** Keep Safe Mode ON for read-only access.
 
-Connect to PostgreSQL from the sidebar
+---
 
-Host, Port, Database, Username, Password
+## 🧠 Model Support
 
-(Optional) paste your GROQ_API_KEY if not in .env
+- Default: `groq/llama-3.1-8b-instant`
+- Also supports:  
+  `groq/llama3-8b-8192`,  
+  `groq/llama3-70b-8192`,  
+  `groq/mixtral-8x7b-32768`,  
+  `groq/llama-3.3-70b-versatile`
 
-Click Connect
+Configure with `.env` or via the app sidebar.
 
-Ask in Chat
-Examples:
+---
 
-“list tables”
+## 🤝 Contributing
 
-“top 50 orders by total”
+Pull requests welcome! For feature ideas or bug reports, open an issue.
 
-“columns and types in users”
+---
 
-“describe table customers”
+## 📄 License
 
-“count users per country order by count desc”
+[MIT](LICENSE)
 
-Review the SQL
+---
 
-App returns one SQL statement; you can edit before execution
+## 💬 Contact
 
-Click EXPLAIN to check the plan or Run to execute
-
-Browse schema
-
-Right panel shows diagram, quick introspection, and optional saved queries
-
-Keep Safe Mode ON unless you must write/alter data. It blocks DDL/DML and multiple statements.
-
-Environment & Models
-
-The app expects Groq via LiteLLM. Good model IDs:
-
-groq/llama-3.1-8b-instant (default)
-
-groq/llama3-8b-8192
-
-groq/llama3-70b-8192
-
-groq/mixtral-8x7b-32768
-
-groq/llama-3.3-70b-versatile
-
-Set the key:
-
-.env → GROQ_API_KEY=gsk_...
-
-or paste it in the sidebar (app uses the sidebar value on Connect)
+Questions or feedback?  
+Open an issue or contact [@Tariq3654467](https://github.com/Tariq3654467).
