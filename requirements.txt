@@ -1,0 +1,7 @@
+streamlit 
+crewai 
+groq 
+psycopg 
+python-dotenv
+graphviz
+litellm 
